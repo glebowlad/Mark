@@ -10065,6 +10065,9 @@ MonoBehaviour:
   target: {fileID: 8362663322264720416, guid: 963c9b40c9b79fb44b5e89cc38dc2bfc, type: 3}
   partToRotate: {fileID: 457336972}
   turnSpeed: 10
+  fireRate: 1
+  bulletPrefab: {fileID: 2870011135302567992, guid: b6423e3d97757cb40a621cb43fb6c841, type: 3}
+  firePoint: {fileID: 1174545660}
 --- !u!1 &6893130390454214319
 GameObject:
   m_ObjectHideFlags: 0

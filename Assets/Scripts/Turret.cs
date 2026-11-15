@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,11 @@ public class Turret : MonoBehaviour
     public float range = 15f;
     public Transform target;
     public Transform partToRotate;
-    public float turnSpeed = 5;
+    public float turnSpeed = 5f;
+    public float fireRate = 1f;
+    private float fireCountDown = 0f;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +27,24 @@ public class Turret : MonoBehaviour
 
         partToRotate.LookAt(target.position);
         partToRotate.localEulerAngles = new Vector3(0, partToRotate.localEulerAngles.y, 0);
+        if (fireCountDown <= 0)
+        {
+            Shoot();
+            fireCountDown = 1f/fireRate;
+            fireCountDown -= Time.deltaTime;
+        }
     }
+
+    private void Shoot()
+    {
+        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        if (!bullet)
+        {
+            bullet.Seek(target);
+        }
+    }
+
     void UpdateTarget ()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
