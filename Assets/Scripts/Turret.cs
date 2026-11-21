@@ -31,15 +31,15 @@ public class Turret : MonoBehaviour
         {
             Shoot();
             fireCountDown = 1f/fireRate;
-            fireCountDown -= Time.deltaTime;
         }
+        fireCountDown -= Time.deltaTime;
     }
 
     private void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
-        if (!bullet)
+        if (bullet != null)
         {
             bullet.Seek(target);
         }
