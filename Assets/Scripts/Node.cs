@@ -8,6 +8,7 @@ public class Node : MonoBehaviour
     public Color HoverColor;
     private Color startColor;
     private Renderer renderer;
+    private GameObject turret;
     void Start()
     {
         renderer  = GetComponent<Renderer>();
@@ -19,6 +20,13 @@ public class Node : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (turret != null)
+        {
+            Debug.Log("Турель уже построена");
+            return;
+        }
+        GameObject turretToBuild = BuildMananger.Instance.GetTurretToBuild();
+        turret=Instantiate(turretToBuild,transform.position, transform.rotation);
         
     }
     private void OnMouseExit()
